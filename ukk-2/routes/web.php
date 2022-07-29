@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\KamarController;
-use App\Http\Controllers\FasilitasHotelController;
 use App\Http\Controllers\TamuController;
+use App\Http\Controllers\KamarController;
+use App\Http\Controllers\ResepsionisController;
+use App\Http\Controllers\FasilitasHotelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,14 @@ use App\Http\Controllers\TamuController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('starter');
-// });
+Route::get('/', function () {
+    return view('starter');
+});
+
+// ========== RESEPSIONIS
+Route::get('/resepsionis', [ResepsionisController::class, 'index']);
+Route::get('/create-resepsionis', [ResepsionisController::class, 'create'])->name('create-resepsionis');
+Route::post('/simpan-resepsionis', [ResepsionisController::class, 'store'])->name('simpan-resepsionis');
 
 // KAMAR
 Route::get('/kamar', [KamarController::class, 'index']);
@@ -36,15 +42,12 @@ Route::get('/edit-fh/{id}', [FasilitasHotelController::class, 'edit']);
 Route::put('/update-fh/{id}', [FasilitasHotelController::class, 'update'])->name('update-fh');
 Route::delete('/delete-fh/{id}', [FasilitasHotelController::class, 'destroy']);
 
+
 //TAMU
 Route::get('/home', function () { return view('tamu.tamu');});
-
 Route::get('/kamar-tamu', function (){ return view('tamu.kamar');});
 //PEMESANAN
-
 Route::get('/tampil', [TamuController::class, 'index'])->name('pesan');
-
 Route::get('/tambahdata', [TamuController::class, 'tambah']);
 Route::post('/insertdata', [TamuController::class, 'simpan'])->name('simpan');
-
 Route::delete('/hapus/{id}', [TamuController::class, 'destroy']);

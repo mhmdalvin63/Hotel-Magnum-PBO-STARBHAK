@@ -43,7 +43,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="/">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -54,7 +54,19 @@
                 ADMIN
             </div>
             <!-- Nav Item - Charts -->
-           
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>About</span></a>
+            </li>
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Fasilitas</span></a>
+            </li>
+            
 
 
             
@@ -303,38 +315,7 @@
 <!-- End of Topbar -->
 
             <!-- Main Content -->
-
-            {{-- @yield('isi') --}}
-
-            <div class="container">
-                <div class="card">
-                    <div class="card-header">
-                      TAMU
-                    </div>
-                    <div class="card-body">
-                      <a href="/home" class="btn btn-primary">Masuk</a>
-                    </div>
-                </div>
-                <br>
-                <div class="card">
-                    <div class="card-header">
-                      RESEPSIONIS
-                    </div>
-                    <div class="card-body">
-                      <a href="/resepsionis" class="btn btn-primary">Masuk</a>
-                    </div>
-                </div>
-                <br>
-                <div class="card">
-                    <div class="card-header">
-                      ADMIN
-                    </div>
-                    <div class="card-body">
-                      <a href="/kamar" class="btn btn-primary">Masuk</a>
-                    </div>
-                </div>
-                
-            </div>
+            @yield('isi')
             
             <!-- End of Main Content -->
 

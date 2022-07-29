@@ -1,4 +1,4 @@
-@extends('starter')
+@extends('starter-tamu')
 
 <!-- @section('judul', 'Form Create') -->
 @section('isi')

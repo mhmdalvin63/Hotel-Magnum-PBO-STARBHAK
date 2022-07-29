@@ -1,4 +1,4 @@
-@extends('starter')
+@extends('starter-admin')
 
 @section('isi')
 
