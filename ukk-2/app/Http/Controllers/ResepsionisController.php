@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Resepsionis;
+use App\Models\tamu;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ResepsionisController;
 
@@ -15,8 +15,10 @@ class ResepsionisController extends Controller
      */
     public function index()
     {
-        $resepsionis = Resepsionis::all();
-        return view('Resepsionis.show', compact('resepsionis'));
+        
+            $data = tamu::all();
+            return view('Resepsionis.show',compact('data'));
+        
     }
 
     /**
@@ -26,7 +28,7 @@ class ResepsionisController extends Controller
      */
     public function create()
     {
-        return view('Resepsionis.create');
+        // return view('Resepsionis.create');
     }
 
     /**
@@ -37,13 +39,13 @@ class ResepsionisController extends Controller
      */
     public function store(Request $request)
     {
-        Resepsionis::create([
-            'nama_tamu' => $request->nama_tamu,
-            'tgl_cekin' => $request->tgl_cekin,
-            'tgl_cekout' => $request->tgl_cekout,
-        ]);
+        // Resepsionis::create([
+        //     'nama_tamu' => $request->nama_tamu,
+        //     'tgl_cekin' => $request->tgl_cekin,
+        //     'tgl_cekout' => $request->tgl_cekout,
+        // ]);
 
-        return redirect('/resepsionis');
+        // return redirect('/resepsionis');
     }
 
     /**

@@ -56,9 +56,15 @@
             <!-- Nav Item - Charts -->
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="/kamar">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+                    <span>Data Kamar</span></a>
+            </li>
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="/fasilitashotel">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Data Fasilitas Hotel</span></a>
             </li>
             
 
