@@ -56,15 +56,21 @@
             <!-- Nav Item - Charts -->
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="/home">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>About</span></a>
+                    <span>Home</span></a>
             </li>
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="/kamar-tamu">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Fasilitas</span></a>
+                    <span>Kamar</span></a>
+            </li>
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="/tampil">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Booking</span></a>
             </li>
             
 

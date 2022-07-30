@@ -46,8 +46,8 @@ Route::delete('/delete-fh/{id}', [FasilitasHotelController::class, 'destroy']);
 //TAMU
 Route::get('/home', function () { return view('tamu.tamu');});
 Route::get('/kamar-tamu', function (){ return view('tamu.kamar');});
-//PEMESANAN
 Route::get('/tampil', [TamuController::class, 'index'])->name('pesan');
+//PEMESANAN
 Route::get('/tambahdata', [TamuController::class, 'tambah']);
 Route::post('/insertdata', [TamuController::class, 'simpan'])->name('simpan');
 Route::delete('/hapus/{id}', [TamuController::class, 'destroy']);
