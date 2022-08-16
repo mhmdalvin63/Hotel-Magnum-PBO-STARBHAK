@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Kamar;
 use Illuminate\Http\Request;
+use App\Http\Resources\KamarResource;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class KamarController extends Controller
 {
@@ -14,7 +17,12 @@ class KamarController extends Controller
      */
     public function index()
     {
-        $datakamar = Kamar::latest()->paginate(5); 
+         //get posts
+         $kamar = Kamar::latest()->paginate(5);
+         //return collection of posts as a resource
+         return new KamarResource(true, 'List Data Kamar', $kamar);
+
+         $datakamar = Kamar::latest()->paginate(5); 
         return view ('kamar.index',compact('datakamar'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -36,12 +44,34 @@ class KamarController extends Controller
      */
     public function store(Request $request)
     {
+        //define validation rules
+        $validator = Validator::make($request->all(), [
+            'tipe_kamar'     => 'required',
+            'nama_fasilitas'     => 'required',
+            'jumlah_kamar'   => 'required',
+        ]);
+        //check if validation fails
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+        // //upload image
+        // $image = $request->file('image');
+        // $image->storeAs('public/posts', $image->hashName());
+        //create post
+        $kamar = Kamar::create([
+            'tipe_kamar'     => $request->tipe_kamar,
+            'nama_fasilitas'     => $request->nama_fasilitas,
+            'jumlah_kamar'   => $request->jumlah_kamar,
+        ]);
+        //return response
+        return new KamarResource(true, 'Data Kamar Berhasil Ditambahkan!', $kamar);
+
+
         $this->validate($request, [
             'tipe_kamar' => 'required',
             'nama_fasilitas' => 'required',
             'jumlah_kamar' => 'required',
         ]);
-
         Kamar::create([
             'tipe_kamar' => $request->tipe_kamar,
             'nama_fasilitas' => $request->nama_fasilitas,
@@ -58,9 +88,10 @@ class KamarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Kamar $kamar)
     {
-        //
+        ///return single post as a resource
+        return new KamarResource(true, 'Data Kamar Ditemukan!', $kamar);
     }
 
     /**
@@ -82,8 +113,49 @@ class KamarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,  Kamar $kamar)
     {
+         //define validation rules
+         $validator = Validator::make($request->all(), [
+            'tipe_kamar'     => 'required',
+            'nama_fasilitas'   => 'required',
+            'jumlah_kamar'   => 'required',
+        ]);
+        //check if validation fails
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+        //update post without image
+        $kamar->update([
+            'tipe_kamar'     => $request->tipe_kamar,
+            'nama_fasilitas'   => $request->nama_fasilitas,
+            'jumlah_kamar'   => $request->jumlah_kamar,
+        ]);
+        
+        //check if image is not empty
+        // if ($request->hasFile('image')) {
+        //     //upload image
+        //     $image = $request->file('image');
+        //     $image->storeAs('public/posts', $image->hashName());
+        //     //delete old image
+        //     Storage::delete('public/posts/'.$post->image);
+        //     //update post with new image
+        //     $post->update([
+        //         'image'     => $image->hashName(),
+        //         'title'     => $request->title,
+        //         'content'   => $request->content,
+        //     ]);
+        // } else {
+
+        //     //update post without image
+        //     $post->update([
+        //         'tipe_kamar'     => $request->title,
+        //         'content'   => $request->content,
+        //     ]);
+        // }
+
+        //return response
+        return new KamarResource(true, 'Data Kamar Berhasil Diubah!', $kamar);
         
         $this->validate($request, [
             'tipe_kamar' => 'required',
@@ -102,8 +174,16 @@ class KamarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Kamar $kamar)
     {
+        // //delete image
+        // Storage::delete('public/posts/'.$post->image);
+        //delete post
+        $kamar->delete();
+        //return response
+        return new KamarResource(true, 'Data Kamar Berhasil Dihapus!', null);
+
+
         $kamar = Kamar::findorfail($id);
         $kamar->delete();
         return back()->with('destroy', 'Data Ke Destroy');
