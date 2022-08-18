@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\tamu;
+use App\Models\Resepsionis;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ResepsionisController;
 
@@ -14,12 +15,13 @@ class ResepsionisController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    
     {
-        
-            $data = tamu::all();
-            return view('Resepsionis.show',compact('data'));
-        
+
+        $data = Resepsionis::all();
+        return view('Resepsionis.show',compact('data'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -39,6 +41,7 @@ class ResepsionisController extends Controller
      */
     public function store(Request $request)
     {
+        
         // Resepsionis::create([
         //     'nama_tamu' => $request->nama_tamu,
         //     'tgl_cekin' => $request->tgl_cekin,

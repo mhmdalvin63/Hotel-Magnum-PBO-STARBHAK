@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Resepsionis extends Model
 {
-    protected $guarded = [
-        
-    ];
+    use HasFactory;
+    protected $table = 'resepsionis';
+    protected $primaryKey = 'id';
+    protected $guarded = [];
 }

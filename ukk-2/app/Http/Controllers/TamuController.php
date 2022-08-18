@@ -4,22 +4,67 @@ namespace App\Http\Controllers;
 
 use App\Models\tamu;
 use Illuminate\Http\Request;
+use App\Http\Resources\TamuResource;
+use Illuminate\Support\Facades\Validator;
 
 class TamuController extends Controller
 {
-    public function index(){
+    public function index()
+    {
+        //get posts
+        $tamu = tamu::latest()->paginate(5);
+        //return collection of posts as a resource
+        return new TamuResource(true, 'List Data Tamu', $tamu);
+        
         $data = tamu::all();
         return view('tamu.pemesanan',compact('data'));
     }
 
-    public function tambah()
+    public function create()
     {
         return view('tamu.pemesanan');
     }
 
-    public function simpan(Request $request)
+    public function store(Request $request)
     {
 
+        //define validation rules
+        $validator = Validator::make($request->all(), [
+            'namapemesan' => 'required',
+            'email' => 'required',
+            'notelp' => 'required',
+            'namatamu' => 'required',
+            'tipekamar' => 'required',
+            'tglcekin' => 'required',
+            'tglcekout' => 'required',
+            'jmlkamar' => 'required', 
+        ]);
+
+        //check if validation fails
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        //upload image
+        // $image = $request->file('image');
+        // $image->storeAs('public/posts', $image->hashName());
+
+        //create post
+        $tamu = tamu::create([
+            'namapemesan' => $request->namapemesan,
+            'email' => $request->email,
+            'notelp' => $request->notelp,
+            'namatamu' => $request->namatamu,
+            'tipekamar' => $request->tipekamar,
+            'tglcekin' => $request->tglcekin,
+            'tglcekout' => $request->tglcekout,
+            'jmlkamar' => $request->jmlkamar,
+        ]);
+
+        //return response
+        return new TamuResource(true, 'Data Post Berhasil Ditambahkan!', $tamu);
+
+        
         $this->validate($request,[
             'namapemesan' => 'required',
             'email' => 'required',
@@ -43,6 +88,12 @@ class TamuController extends Controller
         ]);
 
         return Redirect('/tampil');
+    }
+
+    public function show(tamu $tamu)
+    {
+        //return single post as a resource
+        return new TamuResource(true, 'Data Post Ditemukan!', $tamu);
     }
 
 

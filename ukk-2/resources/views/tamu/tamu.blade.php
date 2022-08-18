@@ -7,11 +7,11 @@
       <form class=" row justify-content-center mt-3">
         <div class="col-md-3">
           <label for="inputCity" class="form-label">Tanggal Check In</label>
-          <input type="date" class="form-control" id="inputCity">
+          <input type="text" class="form-control" id="inputCity">
         </div>
         <div class="col-md-3">
           <label for="inputCity" class="form-label">Tanggal Check Out</label>
-          <input type="date" class="form-control" id="inputCity">
+          <input type="text" class="form-control" id="inputCity">
         </div>
         <div class="col-md-2">
           <label for="inputCity" class="form-label">Jumlah Kamar</label>

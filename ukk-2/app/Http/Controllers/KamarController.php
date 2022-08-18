@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kamar;
+use App\Models\Resepsionis;
 use Illuminate\Http\Request;
 use App\Http\Resources\KamarResource;
 use Illuminate\Support\Facades\Storage;

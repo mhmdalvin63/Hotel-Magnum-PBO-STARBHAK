@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email');
             $table->bigInteger('notelp');
             $table->string('namatamu');
-            $table->enum('tipekamar', ['Superior','Deluxe','Presidential Suite']);
+            $table->string('tipekamar');
             $table->string('tglcekin');
             $table->string('tglcekout');
             $table->string('jmlkamar');
