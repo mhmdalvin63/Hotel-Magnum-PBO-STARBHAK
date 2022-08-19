@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\TamuResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TamuResource extends JsonResource
