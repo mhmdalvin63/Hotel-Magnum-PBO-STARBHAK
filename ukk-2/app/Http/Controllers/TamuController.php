@@ -96,11 +96,72 @@ class TamuController extends Controller
         return new TamuResource(true, 'Data Post Ditemukan!', $tamu);
     }
 
-
-    public function destroy($id)
+    public function update(Request $request, tamu $tamu)
     {
-        $data=tamu::findorfail($id);
-        $data->delete();
-        return back()->with('destroy','data berhasil dihapus');
+        //define validation rules
+        $validator = Validator::make($request->all(), [
+            'namapemesan'     => 'required',
+            'email'   => 'required',
+            'notelp'     => 'required',
+            'namatamu'   => 'required',
+            'tipekamar'     => 'required',
+            'tglcekin'   => 'required',
+            'tglcekout'     => 'required',
+            'jmlkamar'   => 'required',
+        ]);
+        //check if validation fails
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+        //update post without image
+        $tamu->update([
+            'namapemesan'     => $request->namapemesan,
+            'email'   => $request->email,
+            'notelp'   => $request->notelp,
+            'namatamu'   => $request->namatamu,
+            'tipekamar'   => $request->tipekamar,
+            'tglcekin'   => $request->tglcekin,
+            'tglcekout'   => $request->tglcekout,
+            'jmlkamar'   => $request->jmlkamar,
+        ]);
+        //return response
+        return new TamuResource(true, 'Data Post Berhasil Diubah!', $tamu);
+
+        $this->validate($request, [
+            'namapemesan'     => 'required',
+            'email'   => 'required',
+            'notelp'     => 'required',
+            'namatamu'   => 'required',
+            'tipekamar'     => 'required',
+            'tglcekin'   => 'required',
+            'tglcekout'     => 'required',
+            'jmlkamar'   => 'required',
+        ]);
+        $tamu = tamu::findorfail($id);
+        $tamu->update($request->all());
+        return redirect('/tamu')->with('success', 'Data Berhasil Di Update');
+
+    }
+
+
+    // public function destroy($id)
+    // {
+    //     $data=tamu::findorfail($id);
+    //     $data->delete();
+    //     return back()->with('destroy','data berhasil dihapus');
+    // }
+
+    public function destroy(tamu $tamu)
+    {
+
+        //delete post
+        $tamu->delete();
+        //return response
+        return new TamuResource(true, 'Data Post Berhasil Dihapus!', null);
+
+        $tamu = tamu::findorfail($id);
+        $tamu->delete();
+        return back()->with('destroy', 'Data Ke Destroy');
+
     }
 }
