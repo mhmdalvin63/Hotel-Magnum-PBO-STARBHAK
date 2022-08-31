@@ -16,6 +16,7 @@
                                     <th scope="col">Tipe Kamar</th>
                                     <th scope="col">Fasilitas Kamar</th>
                                     <th scope="col">Jumlah Kamar</th>
+                                    <th scope="col">Option</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -26,12 +27,13 @@
                                     <td class="text-center">
                                         <router-link :to="{name: 'kamar.edit-kamar', params:{id: kamar.id }}"
                                             class="btn btn-sm btn-primary mr-1">EDIT</router-link>
-                                       <button @click.prevent="kamarDelete(kamar.id)" class="btn btn-sm btn-danger ml-1">DELETE</button>
+                                        <button @click.prevent="kamarDelete(kamar.id)"
+                                            class="btn btn-sm btn-danger ml-1">DELETE</button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-
+                        <router-link :to="{name: 'index-home'}" class="btn btn-success">Kembali</router-link>
                     </div>
                 </div>
             </div>
@@ -70,6 +72,7 @@
 
             })
 
+
             //method delete
             function kamarDelete(id) {
 
@@ -77,14 +80,20 @@
                 axios.delete(`http://localhost:8000/api/kamar/${id}`)
                     .then(() => {
 
-                        //splice posts 
-                        kamar.value.splice(kamar.value.indexOf(id), 1);
+                        // splice posts
+                        const index = this.kamar.findIndex(kamar => kamar.id === id) // find the post index
+                        if (~index) {
+                            // if the post exists in array
+                            this.kamar.splice(index, 1)
+                        }
 
                     }).catch(error => {
                         console.log(error.response.data)
                     })
 
             }
+
+
 
             //return
             return {

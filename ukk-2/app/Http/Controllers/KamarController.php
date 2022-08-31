@@ -158,15 +158,15 @@ class KamarController extends Controller
         //return response
         return new KamarResource(true, 'Data Kamar Berhasil Diubah!', $kamar);
         
-        // $this->validate($request, [
-        //     'tipe_kamar' => 'required',
-        //     'nama_fasilitas' => 'required',
-        //     'jumlah_kamar' => 'required',
-        // ]);
+        $this->validate($request, [
+            'tipe_kamar' => 'required',
+            'nama_fasilitas' => 'required',
+            'jumlah_kamar' => 'required',
+        ]);
 
-        // $kamar = Kamar::findorfail($id);
-        // $kamar->update($request->all());
-        // return redirect('/kamar')->with('success', 'Data Berhasil Di Update');
+        $kamar = Kamar::findorfail($id);
+        $kamar->update($request->all());
+        return redirect('/kamar')->with('success', 'Data Berhasil Di Update');
     }
 
     /**
@@ -185,8 +185,8 @@ class KamarController extends Controller
         return new KamarResource(true, 'Data Kamar Berhasil Dihapus!', null);
 
 
-        // $kamar = Kamar::findorfail($id);
-        // $kamar->delete();
-        // return back()->with('destroy', 'Data Ke Destroy');
+        $kamar = Kamar::findorfail($id);
+        $kamar->delete();
+        return back()->with('destroy', 'Data Ke Destroy');
     }
 }

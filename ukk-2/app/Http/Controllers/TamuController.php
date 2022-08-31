@@ -12,7 +12,7 @@ class TamuController extends Controller
     public function index()
     {
         //get posts
-        $tamu = tamu::latest()->paginate(5);
+        $tamu = tamu::latest()->get();
         //return collection of posts as a resource
         return new TamuResource(true, 'List Data Tamu', $tamu);
         
